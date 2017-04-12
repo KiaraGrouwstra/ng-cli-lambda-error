@@ -94,8 +94,26 @@ module.exports = {
         "loader": "json-loader"
       },
       {
+        "test": /\.ya?ml$/,
+        "loader": 'yml-loader'
+      },
+      {
         "test": /\.html$/,
         "loader": "raw-loader"
+      },
+      {
+        test: /\.pug/,
+        // include: helpers.root('modules'),
+        loaders: [
+          { loader: 'raw-loader' }, // , query: { root: 'images' }
+          {
+            loader: 'pug-html-loader',
+            query: {
+              doctype: 'html',
+              plugins: ['pug-plugin-ng'],
+            },
+          },
+        ]
       },
       {
         "test": /\.(eot|svg)$/,
