@@ -1,0 +1,45 @@
+.foo(*ngIf='foo')
+  md-card
+    //- a([routerLink]="['/invoices/' + item.invoice_id + '/items/' + item.id]")
+    a([routerLink]="['/foos/' + foo.id]")
+      md-card-title
+        | serialize.foo(foo)
+    md-card-content
+      form
+        //- - for ['name','phone','address']
+        md-input(
+          type='text'
+          placeholder="{{tr.name()}}"
+          '[(ngModel)]'='foo.name'
+          '[ngModelOptions]'='{standalone: true}'
+          '(ngModelChange)'='update(foo)'
+        )
+          span(md-suffix) %&nbsp;
+      form.dialog
+        select(
+          *ngIf='customers | async'
+          '[(ngModel)]'=`invoice.customer_id`
+          '[ngModelOptions]'='{standalone: true}'
+          '(ngModelChange)'='update(foo)'
+        )
+          option(
+            *ngFor='let customer of customers | async'
+            '[value]'='customer.id'
+          )
+            | {{customer.name}}
+        span
+          button(md-mini-fab (click)='openDialog()')
+            md-icon.md-18
+              | add
+    md-divider
+    md-card-content
+      p
+        | {{tr.revenue()}} : {{item.revenue}}
+    md-card-content(*ngFor='let item of invoice.items')
+      invoice-item-detail([item]='item')
+    md-divider
+    md-card-actions
+      button(md-raised-button color='primary' (click)='create_item()') {{tr.addItem() }}
+      //- button(md-raised-button color='accent' [routerLink]="['/foos/' + foo.id + '/edit']") Edit
+      button(md-raised-button color='warn' (click)='remove(foo)') {{tr.delete()}}
+      //- openConfirm

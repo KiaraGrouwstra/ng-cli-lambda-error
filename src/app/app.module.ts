@@ -29,6 +29,19 @@ export function langProvider() {
 };
 
 import { AppComponent } from './app.component';
+// import { FooComp, FoosComp, FooSharedComp } from './components/foo/';
+
+// import { reducers, effects, initialState, dispatchers } from '../../ngrx';
+import { mergedNgrx } from '../../ngrx';
+// let { reducers, effects, initialState, dispatchers } = mergedNgrx;
+let reducers = mergedNgrx.reducers;
+let effects = mergedNgrx.effects;
+let initialState = mergedNgrx.initialState;
+let dispatchers = mergedNgrx.dispatchers;
+import { FooComp, FoosComp, FooSharedComp } from './components/foo/';
+
+export let DISPATCHER = new OpaqueToken('dispatcher');
+export let dispatcherFactory = (store: any/*Store<any>*/) => dispatchers(store);
 
 export const routes: Routes = [
 ];
@@ -39,7 +52,10 @@ export const routing = RouterModule.forRoot(routes);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FooComp,
+    FoosComp,
+    FooSharedComp,
   ],
   imports: [
     BrowserModule,
@@ -54,14 +70,18 @@ export const routing = RouterModule.forRoot(routes);
     MaterialModule,
     CovalentCoreModule,
     routing,
+    StoreModule.provideStore(reducers, initialState),
+    // StoreModule.forFeature('foo', reducers.foo, { initialState: initialState.foo }),
 
     RouterModule.forRoot(routes, { useHash: true }),
     RouterStoreModule.connectRouter(),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
+    EffectsModule.run(effects.foo),
     // DBModule.provideDB(schema),
   ],
   providers: [
     { provide: 'customer.lang', useFactory: langProvider },
+    { provide: DISPATCHER, useFactory: dispatcherFactory, deps: [Store] },
   ],
   bootstrap: [AppComponent]
 })

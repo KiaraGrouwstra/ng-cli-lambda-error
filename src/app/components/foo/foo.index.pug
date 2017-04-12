@@ -1,0 +1,7 @@
+ul(*ngIf='foos$ | async')
+  li(*ngFor='let foo of foos$ | async')
+    foo-detail([foo]='foo')
+button(md-fab (click)='create_foo()')
+  //- api.new()
+  md-icon add
+
