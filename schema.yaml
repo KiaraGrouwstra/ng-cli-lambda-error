@@ -1,0 +1,340 @@
+---
+swagger: '2.0'
+info:
+  title: crud
+  version: 0.0.01
+host: localhost:8000
+basePath: /api
+paths:
+  "/customers":
+    get:
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Customer"
+    post:
+      parameters:
+      - name: customer
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/Customer"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              customer:
+                "$ref": "#/definitions/Customer"
+  "/customers/{id}":
+    get:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/Customer"
+    delete:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+      responses:
+        '204':
+          description: OK
+          schema: {}
+    put:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+      - name: customer
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/Customer"
+      responses:
+        '204':
+          description: OK
+          schema: {}
+    patch:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+      - name: customer
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/Customer"
+      responses:
+        '204':
+          description: OK
+          schema: {}
+  "/products":
+    get:
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Product"
+    post:
+      parameters:
+      - name: product
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/Product"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              product:
+                "$ref": "#/definitions/Product"
+  "/products/{id}":
+    get:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/Product"
+    delete:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+      responses:
+        '204':
+          description: OK
+          schema: {}
+    put:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+      - name: product
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/Product"
+      responses:
+        '204':
+          description: OK
+          schema: {}
+    patch:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+      - name: product
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/Product"
+      responses:
+        '204':
+          description: OK
+          schema: {}
+  "/invoices":
+    get:
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Invoice"
+    post:
+      parameters:
+      - name: invoice
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/Invoice"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              invoice:
+                "$ref": "#/definitions/Invoice"
+  "/invoices/{id}":
+    get:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/Invoice"
+    delete:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+      responses:
+        '204':
+          description: OK
+          schema: {}
+    put:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+      - name: invoice
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/Invoice"
+      responses:
+        '204':
+          description: OK
+          schema: {}
+    patch:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+      - name: invoice
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/Invoice"
+      responses:
+        '204':
+          description: OK
+          schema: {}
+  "/invoices/{invoice_id}/items":
+    get:
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/InvoiceItem"
+    post:
+      parameters:
+      - name: invoice-item
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/InvoiceItem"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              invoice-item:
+                "$ref": "#/definitions/InvoiceItem"
+  "/invoices/{invoice_id}/items/{id}":
+    get:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/InvoiceItem"
+    delete:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+      responses:
+        '204':
+          description: OK
+          schema: {}
+    put:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+      - name: invoice-item
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/InvoiceItem"
+      responses:
+        '204':
+          description: OK
+          schema: {}
+    patch:
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+      - name: invoice-item
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/InvoiceItem"
+      responses:
+        '204':
+          description: OK
+          schema: {}
+definitions:
+  Customer:
+    type: object
+    properties:
+      id: number
+      name: string
+      address: string
+      phone: string
+  Product:
+    type: object
+    properties:
+      id: number
+      name: product
+      price: number
+  Invoice:
+    type: object
+    properties:
+      id: number
+      customer_id: number
+      dicount: number
+      total: number
+  InvoiceItem:
+    type: object
+    properties:
+      id: number
+      invoice_id: number
+      product_id: number
+      quantity: number

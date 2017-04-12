@@ -31,6 +31,18 @@ export function langProvider() {
 import { AppComponent } from './app.component';
 
 export const routes: Routes = [
+  // { path: 'customers', component: FoosComp },
+  // { path: 'customers/:id', component: FooComp },
+  // { path: 'customers', component: CustomersComp },
+  // { path: 'customers/:id', component: CustomerComp },
+  // { path: 'invoices', component: InvoicesComp },
+  // { path: 'invoices/:id', component: InvoiceComp },
+  // { path: 'products', component: ProductsComp },
+  // { path: 'products/:id', component: ProductComp },
+  // { path: 'invoices/:inv_id/items', component: InvoiceItemsComp },
+  // { path: 'invoices/:inv_id/items/:id', component: InvoiceItemComp },
+  // { path: '', redirectTo: 'invoices', pathMatch: 'full'},
+  { path: '', redirectTo: 'foos', pathMatch: 'full'},
 ];
 
 // ./app/app.routing.ts

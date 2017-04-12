@@ -1,0 +1,20 @@
+---
+customer:
+  id: integer
+  name: string
+  address: string
+  phone: string
+product:
+  id: integer
+  name: product
+  price: number
+invoice:
+  id: integer
+  customer_id: integer
+  dicount: number
+  total: number
+invoice-item:
+  id: integer
+  invoice_id: integer
+  product_id: integer
+  quantity: number
