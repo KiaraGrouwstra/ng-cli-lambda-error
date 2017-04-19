@@ -1,6 +1,6 @@
 import * as R from 'ramda';
 import * as L from 'partial.lenses';
-import { domainMeta, genNgrx, mergeNgrx, searchMatches } from 'ng2ls';
+import { domainMeta, genNgrx, mergeNgrx, searchMatches, Rest } from 'ng2ls';
 
 let { foo } = domainMeta({
   foo: {},
@@ -9,6 +9,8 @@ let { foo } = domainMeta({
 // todo:
 // - handle additional effects: `fail`, navigation upon success
 // - authorization: which properties, links and buttons to show in the UI? how to make the guards? base on same DAX expressions as in the back? predicate per class/prop?
+
+// api: { foos: Rest<Foo> }
 
 let obj = {
   crud: {
