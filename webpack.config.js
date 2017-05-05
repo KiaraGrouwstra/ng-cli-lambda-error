@@ -5,6 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const postcssUrl = require('postcss-url');
 const cssnano = require('cssnano');
+const webpack = require('webpack');
 
 const { NoEmitOnErrorsPlugin } = require('webpack');
 const { GlobCopyWebpackPlugin, BaseHrefWebpackPlugin } = require('@angular/cli/plugins/webpack');
@@ -52,7 +53,8 @@ module.exports = {
   "resolve": {
     "extensions": [
       ".ts",
-      ".js"
+      ".js",
+      // ".d.ts",
     ],
     "modules": [
       "./node_modules"
@@ -361,7 +363,8 @@ module.exports = {
       },
       {
         "test": /\.ts$/,
-        "loader": "/home/tycho/Files/Coding/js/angular-cli/packages/@ngtools/webpack/src/index.ts"
+        // "loader": "/home/tycho/Files/Coding/js/angular-cli/packages/@ngtools/webpack/src/index.ts"
+        "loaders": ['awesome-typescript-loader', 'angular2-template-loader']
       }
     ]
   },
@@ -423,15 +426,19 @@ module.exports = {
       "filename": "[name].bundle.css",
       "disable": true
     }),
-    new AotPlugin({
-      "mainPath": "main.ts",
-      "hostReplacementPaths": {
-        "environments/environment.ts": "environments/environment.ts"
-      },
-      "exclude": [],
-      "tsConfigPath": "src/tsconfig.app.json",
-      "skipCodeGeneration": true
-    })
+    // new AotPlugin({
+    //   "mainPath": "main.ts",
+    //   "hostReplacementPaths": {
+    //     "environments/environment.ts": "environments/environment.ts"
+    //   },
+    //   "exclude": [],
+    //   "tsConfigPath": "src/tsconfig.app.json",
+    //   "skipCodeGeneration": true
+    // }),
+    new webpack.ContextReplacementPlugin(
+      /angular(\\|\/)core(\\|\/)@angular/,
+      path.resolve(__dirname, './src')
+    ),
   ],
   "node": {
     "fs": "empty",

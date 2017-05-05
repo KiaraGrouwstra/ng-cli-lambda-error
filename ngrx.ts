@@ -105,4 +105,4 @@ export let ngrxStuff = genNgrx(obj);
 export let mergedNgrx = mergeNgrx(ngrxStuff);
 
 // problem: above code uses lambdas, not allowed in AoT
-console.log(mergedNgrx);
+// console.log(mergedNgrx);
