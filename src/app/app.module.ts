@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { NgModule, OpaqueToken } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -60,7 +61,6 @@ let reducers = mergedNgrx.reducers;
 let effects = mergedNgrx.effects;
 let initialState = mergedNgrx.initialState;
 let dispatchers = mergedNgrx.dispatchers;
-import { FooComp, FoosComp, FooSharedComp } from './components/foo/';
 
 export let DISPATCHER = new OpaqueToken('dispatcher');
 export let dispatcherFactory = (store: any/*Store<any>*/) => dispatchers(store);
@@ -115,7 +115,7 @@ export function counterReducer(state: number = 0, action /*: Action*/) {
     RouterModule.forRoot(routes, { useHash: true }),
     RouterStoreModule.connectRouter(),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
-    EffectsModule.run(effects.foo),
+    EffectsModule.run(effects.crud),
     // DBModule.provideDB(schema),
   ],
   providers: [
