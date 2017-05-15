@@ -17,12 +17,12 @@ import {
   // CovalentExpansionPanelModule,
   // CovalentSearchModule,
   // CovalentStepsModule,
-  // CovalentDialogsModule,
+  CovalentDialogsModule,
   // CovalentFileModule,
   // CovalentLoadingModule,
   // CovalentCommonModule,
   // CovalentDataTableModule,
-  // CovalentLayoutModule,
+  CovalentLayoutModule,
   // CovalentHighlightModule,
   // CovalentMarkdownModule,
 } from '@covalent/core'; // https://github.com/Teradata/covalent/blob/master/src/platform/core/index.ts
@@ -34,7 +34,6 @@ import { DBModule } from '@ngrx/db';
 import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { schema } from './db';
-import { trace } from 'ng2ls';
 import { DISPATCHER } from './di';
 
 /* ng2-translate */
@@ -53,7 +52,7 @@ export function langProvider() {
 };
 
 import { AppComponent } from './app.component';
-// import { FooComp, FoosComp, FooSharedComp } from './components/foo/';
+import { FooComp, FoosComp, FooSharedComp } from './components/foo/';
 
 // import { reducers, effects, initialState, dispatchers } from '../../ngrx';
 import { mergedNgrx } from '../../ngrx';
@@ -71,23 +70,7 @@ export const routes: Routes = [
 // ./app/app.routing.ts
 export const routing = RouterModule.forRoot(routes);
 
-export function counterReducer(state: number = 0, action /*: Action*/) {
-	switch (action.type) {
-		case 'INCREMENT':
-			return state + 1;
-
-		case 'DECREMENT':
-			return state - 1;
-
-		case 'RESET':
-			return 0;
-
-		default:
-			return state;
-	}
-}
-
-@NgModule(trace('stuff', {
+@NgModule({
   declarations: [
     AppComponent,
     FooComp,
@@ -106,10 +89,10 @@ export function counterReducer(state: number = 0, action /*: Action*/) {
     }),
     MaterialModule,
     // CovalentCoreModule,
-    // CovalentDialogsModule,
+    CovalentDialogsModule,
+    CovalentLayoutModule,
     routing,
-    // StoreModule.provideStore(reducers, initialState),
-    StoreModule.provideStore({ counter: counterReducer }),
+    StoreModule.provideStore(reducers, initialState),
     // StoreModule.forFeature('foo', reducers.foo, { initialState: initialState.foo }),
 
     RouterModule.forRoot(routes, { useHash: true }),
@@ -123,5 +106,5 @@ export function counterReducer(state: number = 0, action /*: Action*/) {
     { provide: DISPATCHER, useFactory: dispatcherFactory, deps: [Store] },
   ],
   bootstrap: [AppComponent]
-}))
+})
 export class AppModule { }
