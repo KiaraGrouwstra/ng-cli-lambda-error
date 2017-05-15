@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { NgModule, OpaqueToken } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
@@ -35,6 +35,7 @@ import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { schema } from './db';
 import { trace } from 'ng2ls';
+import { DISPATCHER } from './di';
 
 /* ng2-translate */
 import { TranslateModule } from 'ng2-translate';
@@ -62,7 +63,6 @@ let effects = mergedNgrx.effects;
 let initialState = mergedNgrx.initialState;
 let dispatchers = mergedNgrx.dispatchers;
 
-export let DISPATCHER = new OpaqueToken('dispatcher');
 export let dispatcherFactory = (store: any/*Store<any>*/) => dispatchers(store);
 
 export const routes: Routes = [

@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { make } from '../../factories';
 import * as MyApp from '../../models'; // { Foo, FooItem }
-import { DISPATCHER } from '../../app.module';
+import { DISPATCHER } from '../../di';
 import { AppService } from '../../services/';
 // reconsider as pug mixin?
 @Component({
