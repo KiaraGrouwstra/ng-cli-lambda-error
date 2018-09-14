@@ -35,6 +35,8 @@ import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { schema } from './db';
 import { DISPATCHER } from './di';
+import { AppService } from './services';
+import { ApiService } from 'ng2ls';
 
 /* ng2-translate */
 import { TranslateModule } from 'ng2-translate';
@@ -54,8 +56,8 @@ export function langProvider() {
 import { AppComponent } from './app.component';
 import { FooComp, FoosComp, FooSharedComp } from './components/foo/';
 
-// import { reducers, effects, initialState, dispatchers } from '../../ngrx';
-import { mergedNgrx } from '../../ngrx';
+// import { reducers, effects, initialState, dispatchers } from './ngrx';
+import { mergedNgrx } from './ngrx';
 // let { reducers, effects, initialState, dispatchers } = mergedNgrx;
 let reducers = mergedNgrx.reducers;
 let effects = mergedNgrx.effects;
@@ -65,10 +67,19 @@ let dispatchers = mergedNgrx.dispatchers;
 export let dispatcherFactory = (store: any/*Store<any>*/) => dispatchers(store);
 
 export const routes: Routes = [
+  { path: 'foos', component: FoosComp }, 
+  { path: 'foos/:id', component: FooComp }, 
+  // { path: 'customers', component: CustomersComp }, 
+  // { path: 'customers/:id', component: CustomerComp }, 
+  // { path: 'invoices', component: InvoicesComp }, 
+  // { path: 'invoices/:id', component: InvoiceComp }, 
+  // { path: 'products', component: ProductsComp }, 
+  // { path: 'products/:id', component: ProductComp }, 
+  // { path: 'invoices/:inv_id/items', component: InvoiceItemsComp }, 
+  // { path: 'invoices/:inv_id/items/:id', component: InvoiceItemComp }, 
+  // { path: '', redirectTo: 'invoices', pathMatch: 'full'}, 
+  { path: '', redirectTo: 'foos', pathMatch: 'full'}, 
 ];
-
-// ./app/app.routing.ts
-export const routing = RouterModule.forRoot(routes);
 
 @NgModule({
   declarations: [
@@ -91,7 +102,6 @@ export const routing = RouterModule.forRoot(routes);
     // CovalentCoreModule,
     CovalentDialogsModule,
     CovalentLayoutModule,
-    routing,
     StoreModule.provideStore(reducers, initialState),
     // StoreModule.forFeature('foo', reducers.foo, { initialState: initialState.foo }),
 
@@ -104,6 +114,8 @@ export const routing = RouterModule.forRoot(routes);
   providers: [
     { provide: 'customer.lang', useFactory: langProvider },
     { provide: DISPATCHER, useFactory: dispatcherFactory, deps: [Store] },
+    ApiService,
+    AppService,
   ],
   bootstrap: [AppComponent]
 })

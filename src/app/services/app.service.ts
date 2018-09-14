@@ -4,14 +4,25 @@ import { TdDialogService } from '@covalent/core';
 import { TranslateService } from 'ng2-translate';
 import * as i18n from '../i18n/';
 import { pathProxy } from 'proxy-dsl';
+import { ApiService, Rest } from 'ng2ls';
+import { Foo } from '../models';
+
+interface Api {
+  foos: Rest<Foo>;
+}
 
 @Injectable()
 export class AppService {
-  
+  api: Api;
+
   constructor(
     public dialogService: TdDialogService,
     public translate: TranslateService,
-  ) {}
+    api: ApiService<Api>,
+  ) {
+    api.domain = 'localhost';
+    this.api = api.api;
+  }
 
   get lang(): string {
     return this.translate.currentLang;

@@ -1,6 +1,7 @@
 import * as R from 'ramda';
 import * as L from 'partial.lenses';
 import { domainMeta, genNgrx, mergeNgrx, searchMatches, Rest } from 'ng2ls';
+import { AppService } from './services';
 
 let { foo } = domainMeta({
   foo: {},
@@ -14,6 +15,9 @@ let { foo } = domainMeta({
 
 let obj = {
   crud: {
+    di: {
+      app: AppService,
+    },
     init: {
       [foo.plural]: {},
     },
@@ -35,32 +39,32 @@ let obj = {
     effects: {
       fooIndex: {
         read: true,
-        fn: function() { return this.api.foos.get() }, // if nested, pass in needed id
+        fn: function() { console.log(this); return this.app.api.foos.get() }, // if nested, pass in needed id
         ok: foo.merge,
       },
       fooDetail: {
         read: true,
-        fn: function(x) { return this.api.foos[foo.rId(x)].get() }, // if nested, pass in needed ids
+        fn: function(x) { console.log(this); return this.app.api.foos[foo.rId(x)].get() }, // if nested, pass in needed ids
         ok: foo.set,
       },
       // fooSearch: {
       //   read: true,
       //   // fallback: [],
-      //   fn: function(qry) { return this.api.foos['customSearchSubPath'].get({ q: qry }) },
+      //   fn: function(qry) { return this.app.api.foos['customSearchSubPath'].get({ q: qry }) },
       //   ok: ,
       // },
       fooCreate: {
-        fn: function() { return this.api.foos.post() },
+        fn: function() { console.log(this); return this.app.api.foos.post() },
         ok: foo.set,
         // router.navigate([foo.plural, foo.lId(x)])
       },
       fooEdit: {
-        fn: function(x) { return this.api.foos[foo.rId(x)].put(x) }, // or patch -- handle filtering at form, no reference point here
+        fn: function(x) { console.log(this); return this.app.api.foos[foo.rId(x)].put(x) }, // or patch -- handle filtering at form, no reference point here
         ok: foo.set,
         // router.navigate([foo.plural, foo.lId(x)]) // n/a if auto-save
       },
       fooDelete: {
-        fn: function(x) { return this.api.foos[foo.rId(x)].delete() },
+        fn: function(x) { console.log(this); return this.app.api.foos[foo.rId(x)].delete() },
         // ok: (x) => L.remove(foo.localNav(x)),
         ok: foo.remove,
         // router.navigate([foo.plural]) // if deleted from local view, not if deleted from some parent

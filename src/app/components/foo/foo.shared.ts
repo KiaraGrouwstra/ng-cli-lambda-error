@@ -24,9 +24,9 @@ export class FooSharedComp {
     public app: AppService,
     public route: ActivatedRoute,
     public store: Store<any>,
-    @Inject(DISPATCHER) dispatcher: { foo: { [k: string]: (pl: any) => void } },
+    @Inject(DISPATCHER) dispatcher: { crud: { [k: string]: (pl: any) => void } },
   ) {
-    this.disp = dispatcher.foo;
+    this.disp = dispatcher.crud;
   }
 
   ngOnInit() {

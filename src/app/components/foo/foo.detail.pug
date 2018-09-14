@@ -2,10 +2,10 @@ include ../mixins.pug
 +asyncs({ foo: 'foo$' })
   foo-shared(*ngIf='foo' [foo]='foo')
 
-  .items(*ngIf='foo.items')
+  //- .items(*ngIf='foo.items')
     ul
       li(*ngFor='let item of foo.items')
-        foo-item-shared([item]='item')
+        //- foo-item-shared([item]='item')
     button(md-fab (click)='create()')
       md-icon add
 
